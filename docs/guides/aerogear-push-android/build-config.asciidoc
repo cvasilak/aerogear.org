@@ -10,13 +10,14 @@ There are a few preparatory steps you must take to be able to get an application
 
 Getting the Code
 ~~~~~~~~~~~~~~~~
-Clone the git repo of aerogear-android (currently the ``push'' branch)
+Clone the git repo of https://github.com/aerogear/aerogear-android[aerogear-android] and switch to the ``push'' branch
 [source,c]
 ----
 git clone https://github.com/aerogear/aerogear-android.git
+git checkout push
 ----
 
-Clone the git repo of pusheedemo
+Clone the git repo of https://github.com/secondsun/PushEEDemo.git[pusheedemo]
 [source,c]
 ----
 git clone https://github.com/secondsun/PushEEDemo
@@ -41,7 +42,7 @@ Depending upon your configuration, you may need to also reference the following 
 - Android Support Libraries: android-support-v*.jar ($ANDROID_HOME/extras/android/support/v*)
 - Google Guava: https://code.google.com/p/guava-libraries/[guava.jar]
 - Google GSon: https://code.google.com/p/google-gson/[gson-v-v-v.jar] (v is version)
-- Goole Play Services: google-play-services.jar ($ANDROID_HOME/extras/google/google_play_services/libproject/google-play-services_lib/libs/)
+- Google Play Services: google-play-services.jar ($ANDROID_HOME/extras/google/google_play_services/libproject/google-play-services_lib/libs/)
 
 image::./img/build-path.png[Build Path Configuration]
 
