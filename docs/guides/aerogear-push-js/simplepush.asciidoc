@@ -1,0 +1,13 @@
+---
+layout: basic
+title: SimplePush Primer
+---
+
+== 
+
+As stated in the SimplePush link:https://wiki.mozilla.org/WebAPI/SimplePush/Protocol[protocol spec], the goal of the SimplePush protocol is:
+
+_"To notify clients of changes to application server state in a reliable manner by ensuring that the client will always eventually learn of the latest version of an object for which it has expressed interest."_
+
+
+

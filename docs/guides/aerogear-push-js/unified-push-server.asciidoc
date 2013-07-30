@@ -1,0 +1,55 @@
+---
+layout: basic
+title: AeroGear Unified Push Server
+---
+
+The AeroGear Unified Push Server
+--------------------------------
+
+The _AeroGear Unified Push Server_ defines logical _abstraction_ for Mobile Applications that have support for different Push Networks. It's _Push Applications_ can have different "Variants". For this tutorial we need to create a _Push Application_ which will contain the _SimplePush_ variant. Details on the AeroGear Unified Push Server are discussed link:http://aerogear.org/docs/specs/aerogear-server-push/[here]. 
+
+For the purpose of the guide, we will fail back on the command line and the _curl_ tool to perform the registrations with the server. In the near feature this won't be needed cause a Push Administration console would be used instead (currently in the works).
+
+=== Login to the server
+
+Prior to perform any work with the server, we need to login first. A temporary user 'admin:123' has already been configured, so let's use these credentials to login:
+
+[source,c]
+----
+curl -v -b cookies.txt -c cookies.txt
+	-H "Accept: application/json" -H "Content-type: application/json" 
+	-X POST -d '{"loginName": "admin", "password":"123"}'
+	http://localhost:8080/ag-push/rest/auth/login 
+----
+
+The server would respond with a 'HTTP/1.1 200 OK' status, which means that the login was succeeded. If not, check if you typed correctly the command and if the server is correctly setup. 
+
+=== Register a Push Application 
+
+Now that we are logged in, let's create a new _Push Application_ by executing the following _curl_ command:
+
+[source,c]
+----
+curl -v -b cookies.txt -c cookies.txt 
+	-H "Accept: application/json" -H "Content-type: application/json"
+	-X POST -d '{"name" : "AeroGear-SimplePush-App", "description" :  "My first SimplePush Push App, that uses AeroGear" }'
+	http://localhost:8080/ag-push/rest/applications
+----
+ 
+The response returns a _pushApplicationID_ and a _masterSecret_. Make a note on these ID's cause we will use them later on.
+
+=== Register a SimplePush Variant
+
+Time to register our SimplePush Variant. Execute the following _curl_ command, replace in the URL the _PUSH_ID_ with the _pushApplicationID_ you received earlier and change the pushNetworkURL parameter to point to the running SimplePush server.
+
+[source,c]
+----
+curl -v -b cookies.txt -c cookies.txt 
+  -v -H "Accept: application/json" -H "Content-type: application/json"
+  -X POST -d '{"pushNetworkURL" : "http://localhost:7777/endpoint/"}'
+  http://localhost:8080/ag-push/rest/applications/{PUSH_ID}/simplePush
+----
+
+The response returns a _variantID_ and a _secret_, that will be both used later on when registering your installation through the JavaScript client SDK so please make a note on them too.
+
+That's all. Now, let's move to create a very simple link:../web-app[web application] that will receive notifications.

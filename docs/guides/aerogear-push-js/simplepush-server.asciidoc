@@ -1,0 +1,11 @@
+---
+layout: basic
+title: AeroGear SimplePush Server
+---
+
+The AeroGear SimplePush Server
+------------------------------
+
+The _AeroGear SimplePush server_ is a high performant implementation of the SimplePush protocol based on link:http://netty.io[Netty framework]. It supports the 
+
+=== Setup 
