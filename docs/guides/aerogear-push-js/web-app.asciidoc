@@ -16,8 +16,30 @@ On top of the file you will notice the 'UnifiedPushClient' object being created 
 
 [source,javascript]
 ----
-UPClient = AeroGear.UnifiedPushClient( "6c73c51c-f4d4-45da-800a-5743501bf4e0", "5cdc4870-42b7-44bd-854a-c80279a6e2dc", "http://localhost:8080/ag-push/rest/registry/device" );
+var client = AeroGear.UnifiedPushClient(
+        "6c73c51c-f4d4-45da-800a-5743501bf4e0", 
+        "5cdc4870-42b7-44bd-854a-c80279a6e2dc",
+        "http://localhost:8080/ag-push/rest/registry/device"
+    );
 ----
+
+
+Now we need to perform the actual registration of the client against the UnifiedPush Server:
+
+[source,javascript]
+----
+var metadata = new Object();
+metadata.deviceToken = "23444";
+metadata.category = "sport";
+metadata.alias = "matze@apache";
+
+// register with 
+client.registerWithPushServer(metadata);
+----
+
+
+TODO: some more comments on that new UP-JS API
+
 
 Once this is configured, we are ready to run the application. Point your web browser to it and you should see the following:
 
