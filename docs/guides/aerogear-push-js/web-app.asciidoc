@@ -4,3 +4,47 @@ title: Web Example
 ---
 
 == Web Example
+
+Now that we have configured both SimplePush and UnifiedPush servers and have them up and running, it's time to explore a simple web application that will exercise AeroGear JavaScript API support and will demonstrate the workflow in action. Start by cloning the example from link:https://github.com/aerogear/aerogear-push-quickstart-web[here]. 
+
+[NOTE]
+The example needs to be served by a web server and most platforms nowadays come with one preinstalled. See Appendix for brief details on setting up a web server on some common platforms.
+
+As with the link:http://staging.aerogear.org/docs/guides/aerogear-push-ios/iOS-app/[iOS] and link:http://TODO[Android] client SDKs, we need first to configure it with the _variantId_ and _variantSecret_ of the PushApplication. Navigate to _js/_ folder and open in your favourite text editor, the _socket.js_ file. The file contains the main logic of the application and is responsible to register the channels with the SimplePush server, retrieve the endpoints for the update, and then register those endpoints with the UnifiedPush so that notification can be received. 
+
+On top of the file you will notice the 'UnifiedPushClient' object being created with the registration details. The first param is the _variantId_, then the _variantSecret_ and finally the host of the running UnifiedPush server. Change them accordingly to your specific configuration.
+
+[source,javascript]
+----
+UPClient = AeroGear.UnifiedPushClient( "6c73c51c-f4d4-45da-800a-5743501bf4e0", "5cdc4870-42b7-44bd-854a-c80279a6e2dc", "http://localhost:8080/ag-push/rest/registry/device" );
+----
+
+Once this is configured, we are ready to run the application. Point your web browser to it and you should see the following:
+
+image:../img/simplepush_main_screen.png[SimplePush main screen]
+
+
+
+
+
+
+== Appendix - Web Server Installation
+
+#### Mac WebServer
+
+Serve aerogear-push-quickstart-web from a local webserver. One way to do this is to create a symbolic link in the platform default web installation. for example:
+
+    cd /Library/WebServer/Documents/
+    sudo ln -s /path/to/aerogear-push-quickstart-web/ push
+
+Now you should be able to point your browser to ```http://localhost/push```
+The path to your documents directory and the port that the web server is listening to might differ. For httpd the look
+in _/etc/apache2/httpd.conf_ for this information.
+
+#### Python WebServer
+
+In case you are not running on a Mac, there is a simple HTTP server that comes with Python. Simple navigate to the project folder and issue:
+
+    python -m SimpleHTTPServer 8000
+
+Now you should be able to point your browser to ```http://localhost:8000```
